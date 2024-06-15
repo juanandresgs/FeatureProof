@@ -1,4 +1,5 @@
 # idapython_lib.py
+import re
 import idaapi
 import idc
 import idautils
@@ -20,12 +21,32 @@ def format_address(ea): # Works
     return "0x{:08X}".format(ea)
 
 #    Works
-def format_internal_address_from_hex(ea):
-    return ea
+def format_ea_t(ea) -> int:
+    return int(ea,16)
 
 #    Works
 def format_internal_address_from_string(addr_str):
     return int(addr_str, 16)
+
+# Works
+def rename_symbol_at_address(address, new_name):
+    """
+    Renames the symbol at the given address.
+    
+    :param address: The address of the symbol to rename.
+    :param new_name: The new name for the symbol.
+    :return: None
+    """    
+    address = int(address, 16)
+    if idc.set_name(address, new_name, idc.SN_CHECK):
+        print(f"Symbol at 0x{address:X} renamed to {new_name}.")
+    else:
+        print(f"Failed to rename symbol at 0x{address:X}.")
+
+# Works
+def check_type_is(var, wanted=int):
+    if not isinstance(var, wanted):
+        raise TypeError(f"Expected variable to be of type {wanted}, got {type(var)} instead.")
 
 ##################################
 ###########FUNCTIONS##############
@@ -266,13 +287,35 @@ def create_segment(start, end, name, segment_class):
     segm.type = idaapi.SEG_CODE
     ida_segment.add_segm_ex(segm, name, segment_class, ida_segment.ADDSEG_OR_DIE)
 
+def get_segment_name_at_address(ea):
+    """
+    Get the segment name at a given address.
+    
+    :param ea: Address to check the segment name
+    :return: Name of the segment or None if not found
+    """
+    # Ensure ea is of type ea_t
+    check_type_is(ea, int)
+
+    segment = ida_segment.getseg(ea)
+    if segment:
+        segment_name = ida_segment.get_segm_name(segment)
+        return segment_name
+    else:
+        return None
+
 ##################################
 ############XREFs#################
 ##################################
 
 #   Works
 def get_all_xref_addresses_to_this_address(ea):
-    return [format_address(ref.frm) for ref in idautils.XrefsTo(ea)]
+    check_type_is(ea)
+    try:
+        return [format_address(ref.frm) for ref in idautils.XrefsTo(ea)]
+    except Exception as e:
+        print(f"Error: {e}")
+        return []
 
 """
 def get_all_xref_addresses_to_this_name(symbol_name):
@@ -295,6 +338,88 @@ def get_all_xrefs_to_function(ea):
     for head in idautils.Heads(func.start_ea, func.end_ea):
         xrefs.extend([format_address(ref.frm) for ref in idautils.XrefsTo(head)])
     return xrefs
+
+##################################
+############ STRINGS #############
+##################################
+
+# Works
+def get_all_strings(min_length=4):
+    """
+    Retrieve all strings in the binary with a minimum length.
+    
+    :param min_length: Minimum length of strings to be retrieved.
+    :return: List of tuples containing (address, string).
+    """
+    strings = []
+    for s in idautils.Strings():
+        if len(str(s)) >= min_length:
+            strings.append((format_address(s.ea), str(s)))
+    return strings
+
+# Works
+def get_strings_containing_substr(substr, min_length=4):
+    """
+    Retrieve all strings in the binary containing a specific substring and with a minimum length.
+    
+    :param substr: The substring to filter strings.
+    :return: List of tuples containing (address, string).
+    """
+    return [s for s in get_all_strings(min_length) if substr in s[1]]
+
+# Works
+def get_strings_starting_with(substr, min_length=4):
+    """
+    Retrieve all strings in the binary that start with a specific substring and with a minimum length.
+    
+    :param substr: The substring to filter strings.
+    :param min_length: Minimum length of strings to be retrieved.
+    :return: List of tuples containing (address, string).
+    """
+    return [s for s in get_all_strings(min_length) if s[1].startswith(substr)]
+
+# Works
+def get_strings_ending_with(substr, min_length=4):
+    """
+    Retrieve all strings in the binary that end with a specific substring and with a minimum length.
+    
+    :param substr: The substring to filter strings.
+    :param min_length: Minimum length of strings to be retrieved.
+    :return: List of tuples containing (address, string).
+    """
+    return [s for s in get_all_strings(min_length) if s[1].endswith(substr)]
+
+def get_strings_intersection_of_start_and_end(start_substr, end_substr, min_length=4):
+    """
+    Retrieve the union of strings that start with or end with a specific substring and with a minimum length.
+    
+    :param substr: The substring to filter strings.
+    :param min_length: Minimum length of strings to be retrieved.
+    :return: Set of tuples containing (address, string).
+    """
+    starting_strings = set(get_strings_starting_with(start_substr, min_length))
+    ending_strings = set(get_strings_ending_with(end_substr, min_length))
+    return starting_strings.intersection(ending_strings)
+
+# Another for contains multiple substrs
+
+# Works
+def sanitize_ida_symbol_name(name):
+    """
+    Replaces characters in a string that can't be used in IDA Pro symbol names with an underscore.
+    
+    :param path: The string to be sanitized.
+    :return: A sanitized string that can be used as an IDA Pro symbol name.
+    """
+    # Define a regex pattern to match characters that are not allowed in IDA Pro function names
+    pattern = re.compile(r'[^a-zA-Z0-9_]')
+    sanitized_name = pattern.sub('_', name)
+    
+    # Ensure the first character is not a digit
+    if sanitized_name and sanitized_name[0].isdigit():
+        sanitized_name = '_' + sanitized_name
+    
+    return sanitized_name
 
 ######################
 # IDEAS TO IMPLEMENT #
