@@ -48,6 +48,15 @@ def check_type_is(var, wanted=int):
     if not isinstance(var, wanted):
         raise TypeError(f"Expected variable to be of type {wanted}, got {type(var)} instead.")
 
+# Works
+def is_64bit():
+    """
+    Determine if the analyzed sample is 64-bit.
+    
+    :return: True if the sample is 64-bit, False if it is 32-bit.
+    """
+    return idaapi.inf_is_64bit()
+
 ##################################
 ###########FUNCTIONS##############
 ##################################
@@ -156,6 +165,17 @@ def print_function_info_summary(ea):
 ##################################
 ######STRUCTURES AND TYPES########
 ##################################
+
+# Works
+def does_struct_exist(struct_name):
+    """
+    Check if a struct with a specific name exists in the IDA database.
+
+    :param struct_name: Name of the struct to check.
+    :return: True if the struct exists, False otherwise.
+    """
+    sid = ida_struct.get_struc_id(struct_name)
+    return sid != ida_idaapi.BADADDR
 
 #   Untested
 def create_struct_type(struct_name, size, fields):
@@ -389,6 +409,19 @@ def get_strings_ending_with(substr, min_length=4):
     """
     return [s for s in get_all_strings(min_length) if s[1].endswith(substr)]
 
+# Works
+def get_strings_matching_regex(pattern, min_length=4):
+    """
+    Retrieve all strings in the binary that match the given regex pattern and with a minimum length.
+    
+    :param pattern: The regex pattern to filter strings.
+    :param min_length: The minimum length of the strings to retrieve.
+    :return: List of tuples containing (address, string).
+    """
+    regex = re.compile(pattern)
+    return [(addr, s) for addr, s in get_all_strings(min_length) if regex.search(s)]
+
+
 def get_strings_intersection_of_start_and_end(start_substr, end_substr, min_length=4):
     """
     Retrieve the union of strings that start with or end with a specific substring and with a minimum length.
@@ -400,8 +433,6 @@ def get_strings_intersection_of_start_and_end(start_substr, end_substr, min_leng
     starting_strings = set(get_strings_starting_with(start_substr, min_length))
     ending_strings = set(get_strings_ending_with(end_substr, min_length))
     return starting_strings.intersection(ending_strings)
-
-# Another for contains multiple substrs
 
 # Works
 def sanitize_ida_symbol_name(name):
@@ -420,6 +451,30 @@ def sanitize_ida_symbol_name(name):
         sanitized_name = '_' + sanitized_name
     
     return sanitized_name
+
+######################
+# HEX-RAYS DECOMP    #
+######################
+
+# Works
+def dump_decompiled_function_as_text(ea):
+    """
+    Dumps the decompiled pseudocode of the function at the given address.
+    """
+    f = ida_funcs.get_func(ea)
+    if not f:
+        print("Function not found at 0x{:x}".format(ea))
+        return
+
+    cfunc = ida_hexrays.decompile(ea)
+    if not cfunc:
+        print("Failed to decompile function at 0x{:x}".format(ea))
+        return
+
+    pseudocode = cfunc.get_pseudocode()
+    for line in pseudocode:
+        print(ida_lines.tag_remove(line.line))
+
 
 ######################
 # IDEAS TO IMPLEMENT #
