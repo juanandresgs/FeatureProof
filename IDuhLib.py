@@ -10,6 +10,7 @@ import ida_xref
 import ida_bytes
 import ida_typeinf
 import ida_dirtree
+import ida_idaapi
 
 
 ##################################
@@ -37,7 +38,6 @@ def rename_symbol_at_address(address, new_name):
     :param new_name: The new name for the symbol.
     :return: None
     """    
-    address = int(address, 16)
     if idc.set_name(address, new_name, idc.SN_CHECK):
         print(f"Symbol at 0x{address:X} renamed to {new_name}.")
     else:
@@ -213,13 +213,40 @@ def create_struct_type(struct_name, size, fields):
         
     return sid
 
-#   Untested
-def change_symbol_type(ea, new_type):
-    til = idaapi.get_idati()
-    tinfo = idaapi.tinfo_t()
-    if ida_typeinf.parse_decl(tinfo, til, new_type, ida_typeinf.PT_SIL):
-        return idaapi.apply_tinfo(ea, tinfo, idaapi.TINFO_DEFINITE)
-    return False
+# Works
+def set_symbol_type_to_custom_struct(ea, struct_name):
+    """
+    Set the type of a symbol at the given address to a custom struct.
+
+    :param ea: The address of the symbol.
+    :param struct_name: The name of the custom struct.
+    :return: True if the type was set successfully, False otherwise.
+    """
+    try:
+        # Get the structure ID
+        sid = ida_struct.get_struc_id(struct_name)
+        if sid == idaapi.BADADDR:
+            print(f"Structure '{struct_name}' not found.")
+            return False
+        
+        # Get the size of the structure
+        struct_size = ida_struct.get_struc_size(sid)
+        if struct_size == 0:
+            print(f"Structure '{struct_name}' has size 0.")
+            return False
+        
+        if not ida_bytes.create_struct(ea, struct_size, sid):
+            print(f"Failed to create structure '{struct_name}' at address {hex(ea)}.")
+            return False
+        
+        # # Optionally, rename the symbol at the address
+        # idc.set_name(ea, struct_name, idc.SN_CHECK)
+        
+        print(f"Successfully set the type of the symbol at address {hex(ea)} to '{struct_name}'.")
+        return True
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 #   Untested
 def change_function_prototype(ea, prototype):
@@ -503,9 +530,29 @@ def dump_decompiled_function_as_text(ea):
 """
     Get symbol type
 """
-"""
-    Make comment at address
-"""
+# Works (for comments in disassembly, not decompilation)
+def set_comment_at_address(ea, comment, is_repeatable=False):
+    """
+    Set a comment at a given address in IDA Pro.
+
+    :param ea: The address where the comment should be set.
+    :param comment: The comment text to set.
+    :param is_repeatable: Boolean indicating if the comment should be repeatable. Default is False.
+    :return: True if the comment was set successfully, False otherwise.
+    """
+    try:
+        # Set the comment at the given address
+        result = idc.set_cmt(ea, comment, is_repeatable)
+        
+        if result:
+            print(f"Successfully set the comment at address {hex(ea)}.")
+            return True
+        else:
+            print(f"Failed to set the comment at address {hex(ea)}.")
+            return False
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 """
     Get XREFs to symbol
 """
