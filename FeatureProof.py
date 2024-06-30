@@ -1,4 +1,3 @@
-# idapython_lib.py
 import re
 import idaapi
 import idc
