@@ -9,13 +9,13 @@ In its current version, FeatureProof enables IDAPython compatibility with IDA Pr
 ## Design Goals
 - [ DONE ] Autodetect IDA Pro version and transparently adjust the relevant function calls.
 - [ IN PROGRESS ] List available functions and their compatibility status.
--[ DONE ] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
--[ DONE ] Set a function template.
--[ IN PROGRESS ] Reach feature parity with FeatureProof beta.
--[ IN PROGRESS ] Keep a compatibility table for each function.
--[ NOT STARTED ] Set a roadmap of desired functions.
--[ NOT STARTED ] Port function implementations to IDA 9 / IDALIB.
--[ NOT STARTED ]
+- [ DONE ] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
+- [ DONE ] Set a function template.
+- [ IN PROGRESS ] Reach feature parity with FeatureProof beta.
+- [ IN PROGRESS ] Keep a compatibility table for each function.
+- [ NOT STARTED ] Set a roadmap of desired functions.
+- [ NOT STARTED ] Port function implementations to IDA 9 / IDALIB.
+- [ NOT STARTED ]
 
 ## Function Template
 Create a new file in the Functions directory under the name 'function_name.py'. The file should contain the following template:
@@ -50,7 +50,6 @@ If functionality is added back to this repo, please add to the compatibility tab
 | format_internal_address_from_string | No | Yes | No |
 | sanitize_ida_symbol_name | No | Yes | No |
 | rename_symbol_at_address | No | Yes | No |
-| --------------|-------------|-------------|----------|
 ### Strings Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
@@ -59,12 +58,10 @@ If functionality is added back to this repo, please add to the compatibility tab
 | get_strings_starting_with | No | Yes | No |
 | get_strings_ending_with | No | Yes | No |
 | get_strings_matching_regex | No | Yes | No |
-|---------------|-------------|-------------|----------|
 ### Comment Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
 | set_comment_at_address | No | Yes | No |
-|---------------|-------------|-------------|----------|
 
 
 
