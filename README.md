@@ -1,11 +1,108 @@
 # FeatureProof
 
-FeatureProof is an IDA Python common sense middleware library to build non-brittle scripts and plugins in the face of regular changes (and terrible design) of the IDAPython API.
+FeatureProof is an aspirational IDA Python common sense middleware library to build pseoducode-like scripts and plugins that resist the radical API shifts (and terrible design) of the IDAPython API.
 
-## Updated 06.28.2024:
+At this time, FeatureProof is a work in progress and is not ready for use. The library is being developed in parallel and with the explicit goal of supporting Project 0xA11c (Oxalic), with a view towards supporting other projects in the future.
 
-Working Functions List: <TBD>
+In its current version, FeatureProof enables IDAPython compatibility with IDA Pro v7.6(?)-8.4. The intent is to expand that support to the new IDALIB API introduced with IDA 9. Partial backward compatibility with IDA 6.8+ is possible but not the main objective.
+
+## Design Goals
+- [ DONE ] Autodetect IDA Pro version and transparently adjust the relevant function calls.
+- [ IN PROGRESS ] List available functions and their compatibility status.
+-[ DONE ] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
+-[ DONE ] Set a function template.
+-[ IN PROGRESS ] Reach feature parity with FeatureProof beta.
+-[ IN PROGRESS ] Keep a compatibility table for each function.
+-[ NOT STARTED ] Set a roadmap of desired functions.
+-[ NOT STARTED ] Port function implementations to IDA 9 / IDALIB.
+-[ NOT STARTED ]
+
+## Function Template
+Create a new file in the Functions directory under the name 'function_name.py'. The file should contain the following template:
+
+<Refer to sample_implementation/function_template.py>
+
+The function will be loaded automatically and hotloaded upon changes in case of active development.
+
+If functionality is added back to this repo, please add to the compatibility table along with relevant tested version compatibility.
+
+# Usage
+```python
+    import idaapi
+    idaapi.require("FeatureProof")
+    from FeatureProof import Middleware
+
+    fp = Middleware()
+    try:
+        print(fp.get_all_strings())
+    except AttributeError as e:
+        print(f"Error: {e}")
+```
+
+# Function Compatibility Table
+- Updated 10.4.2024
+
+### Core Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| format_address | No | Yes | No |
+| format_ea_t | No | Yes | No |
+| format_internal_address_from_string | No | Yes | No |
+| sanitize_ida_symbol_name | No | Yes | No |
+| rename_symbol_at_address | No | Yes | No |
+| --------------|-------------|-------------|----------|
+### Strings Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| get_all_strings| No | Yes | No |
+| get_strings_containing_substr | No | Yes | No |
+| get_strings_starting_with | No | Yes | No |
+| get_strings_ending_with | No | Yes | No |
+| get_strings_matching_regex | No | Yes | No |
+|---------------|-------------|-------------|----------|
+### Comment Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| set_comment_at_address | No | Yes | No |
+|---------------|-------------|-------------|----------|
+
+
+
 
 # Tools currently relying on the FeatureProof Library:
-
 - [Project 0xA11c (Oxalic)](https://github.com/juanandresgs/Proj-0xA11c)
+
+# Roadmap
+    -[x] Implement hotloading logic
+    -[x] Define a function template
+    -[IN PROGRESS] Break up monolithic functionality into templated functions
+    -[ ] Retest Project 0xA11c scripts and insure parity
+    -[ ] Publish development up to this point
+    -[ ] Deduplicate funtionality
+    -[ ] Is there a better organization/segmentation for functions by namespace or functionality type?
+
+## Desired Functions:
+    - Get XREFs to symbol
+    - Get XREFs to address
+    - Get XREFs from address
+    - Get descending call graph from starting function
+    - Get ascending call graph from starting function
+    - Get XREF count to symbol
+    - def list_all_segments():
+    - def list_all_segments_by_name():
+    - def list_all_segments_by_starting_address():
+    - def determine_start_of_segment_at_address(ea):
+    - List functions in a specified folder in IDA Pro.
+    - def list_functions_in_folder(folder_name):
+    - def move_folder(src_folder_name, dest_folder_name):
+    - Move all functions from one folder to another in IDA Pro.
+    - def empty_folder(folder_name):
+    - Get all symbols referred to within a function
+    - Get all references to a given symbol name
+    - Get function at address
+    - Get segment name at address
+    - Get value of first operand
+    - Get value of second operand
+    - Get function argument values at XREFs
+    - Get symbol type
+    - def get_all_xref_addresses_to_this_name(symbol_name):
