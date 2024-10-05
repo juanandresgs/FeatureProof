@@ -1,19 +1,18 @@
 """
-    FeatureProof Middleware function: format_address.py
+    FeatureProof Middleware function: walk_functions.py
 
-    Format an address as a hex string.
+    Walk through all functions in the binary.
 
-    :param ea: Address to be formatted.
-    :return: Formatted address as a string.
+    :return: Iterator of function addresses.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
-def function_8(ea):
+def function_8():
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return "0x{:08X}".format(ea)
+    return idautils.Functions()
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -23,8 +22,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'format_address',
-            'parameters': ['ea'],
-            'return_type': 'str'
+            'description': 'Walk through all functions in the binary.',
+            'parameters': [],
+            'return_type': 'Iterator[int]'
         },
     }

@@ -68,7 +68,7 @@ class Middleware:
     def inject_imports(self):
         modules = [
             'idaapi', 'idc', 'idautils', 'ida_struct', 'ida_funcs',
-            'ida_segment', 'ida_xref', 'ida_bytes', 'ida_typeinf', 'ida_dirtree', 'os', 're'
+            'ida_segment', 'ida_xref', 'ida_bytes', 'ida_typeinf', 'ida_dirtree', 'ida_hexrays', 'ida_lines', 'os', 're'
         ]
         for module_name in modules:
             module = idaapi.require(module_name)

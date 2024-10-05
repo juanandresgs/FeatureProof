@@ -1,10 +1,10 @@
 """
-    FeatureProof Middleware function: format_address.py
+    FeatureProof Middleware function: get_function_name_from_address.py
 
-    Format an address as a hex string.
+    Get the name of the function at a given address.
 
-    :param ea: Address to be formatted.
-    :return: Formatted address as a string.
+    :param ea: The address of the function.
+    :return: The name of the function.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 
@@ -13,7 +13,7 @@ def function_6():
 
 def function_8(ea):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return "0x{:08X}".format(ea)
+    return idc.get_func_name(ea)
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -23,7 +23,7 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'format_address',
+            'description': 'Get the name of the function at a given address.',
             'parameters': ['ea'],
             'return_type': 'str'
         },

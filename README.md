@@ -50,6 +50,12 @@ If functionality is added back to this repo, please add to the compatibility tab
 | format_internal_address_from_string | No | Yes | No |
 | sanitize_ida_symbol_name | No | Yes | No |
 | rename_symbol_at_address | No | Yes | No |
+| check_type_is | No | Yes | No |
+| is_64_bit | No | Yes | No |
+### XREFs
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| get_xref_addresses_to_this_address | No | Yes | No |
 ### Strings Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
@@ -62,6 +68,17 @@ If functionality is added back to this repo, please add to the compatibility tab
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
 | set_comment_at_address | No | Yes | No |
+### Decompiler Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| dump_decompiled_function_as_text | No | Yes | No |
+### Function Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| walk_functions | No | Yes | No |
+| walk_functions_return_addresses | No | Yes | No |
+| walk_functions_return_names | No | Yes | No |
+| get_function_name_from_address | No | Yes | No |
 
 
 
@@ -77,6 +94,7 @@ If functionality is added back to this repo, please add to the compatibility tab
     -[ ] Publish development up to this point
     -[ ] Deduplicate funtionality
     -[ ] Is there a better organization/segmentation for functions by namespace or functionality type?
+    - [ ] Find a way to better integrate enums (function_types)
 
 ## Desired Functions:
     - Get XREFs to symbol
