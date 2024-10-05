@@ -9,14 +9,14 @@ At this time, FeatureProof is a work in progress. The library is being parallel 
 In its current version, FeatureProof enables IDAPython compatibility with IDA Pro v7.4-8.4. The intent is to expand that support to the new IDALIB API introduced with IDA 9. Backward compatibility with IDA 6.8-7.2 may be possible but not the main objective as it requires supporting Python 2.7 as well.
 
 ## Design Goals
-- [ DONE ] Autodetect IDA Pro version and transparently adjust the relevant function calls.
+- [X] Autodetect IDA Pro version and transparently adjust the relevant function calls.
 - [ IN PROGRESS ] List available functions and their compatibility status.
-- [ DONE ] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
-- [ DONE ] Set a function template.
+- [X] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
+- [X] Set a function template.
 - [ IN PROGRESS ] Reach feature parity with FeatureProof beta.
 - [ IN PROGRESS ] Keep a compatibility table for each function.
-- [ NOT STARTED ] Set a roadmap of desired functions.
-- [ NOT STARTED ] Port function implementations to IDA 9 / IDALIB.
+- [ ] Set a roadmap of desired functions.
+- [ ] Port function implementations to IDA 9 / IDALIB.
 
 ## Function Template
 Create a new file in the Functions directory under the name 'function_name.py'. The file should contain the following template:
@@ -85,13 +85,13 @@ If functionality is added back to this repo, please add to the compatibility tab
 - [Project 0xA11c (Oxalic)](https://github.com/juanandresgs/Proj-0xA11c)
 
 # Roadmap
--[x] Implement hotloading logic
--[x] Define a function template
--[X] Publish development up to this point
--[IN PROGRESS] Break up monolithic functionality into templated functions
--[ NOT STARTED ] Refactor and test Project 0xA11c scripts to insure beta parity
--[ ] Deduplicate funtionality
--[ ] Is there a better organization/segmentation for functions by namespace or functionality type?
+- [X] Implement hotloading logic
+- [X] Define a function template
+- [X] Publish development up to this point
+- [IN PROGRESS] Break up monolithic functionality into templated functions
+- [ NOT STARTED ] Refactor and test Project 0xA11c scripts to insure beta parity
+- [ ] Deduplicate funtionality
+- [ ] Is there a better organization/segmentation for functions by namespace or functionality type?
 - [ ] Find a way to better integrate enums (function_types) and sub classes (func_info)
 
 ## Desired Functions:
