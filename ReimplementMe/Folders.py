@@ -1,5 +1,5 @@
 func_dir: ida_dirtree.dirtree_t
-func_dir =   ida_dirtree.get_std_dirtree(ida_dirtree.DIRTREE_FUNCS)
+func_dir = ida_dirtree.get_std_dirtree(ida_dirtree.DIRTREE_FUNCS)
 ite = ida_dirtree.dirtree_iterator_t()
 ok = func_dir.findfirst(ite, "*")
 

@@ -11,6 +11,7 @@
 """
 
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+
 def function_6():
     """
         Example function for IDA Pro 6.8-7.x
