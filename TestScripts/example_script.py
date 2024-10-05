@@ -1,8 +1,11 @@
+from logging import DEBUG
 import idaapi
 idaapi.require("FeatureProof")
 from FeatureProof import Middleware
 
-fp = Middleware("sample_implementation")
+fp = Middleware("./TestScripts/sample_implementation")
+print(fp)
+fp.set_debug_mode(True)
 
 # Access and execute the example function for the current IDA Pro version
 try:
