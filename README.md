@@ -9,14 +9,16 @@ At this time, FeatureProof is a work in progress. The library is being parallel 
 In its current version, FeatureProof enables IDAPython compatibility with IDA Pro v7.4-8.4. The intent is to expand that support to the new IDALIB API introduced with IDA 9. Backward compatibility with IDA 6.8-7.2 may be possible but not the main objective as it requires supporting Python 2.7 as well.
 
 ## Design Goals
-- [X] Autodetect IDA Pro version and transparently adjust the relevant function calls.
-- [ IN PROGRESS ] List available functions and their compatibility status.
-- [X] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
-- [X] Set a function template.
-- [ IN PROGRESS ] Reach feature parity with FeatureProof beta.
-- [ IN PROGRESS ] Keep a compatibility table for each function.
-- [ ] Set a roadmap of desired functions.
+- [✅] Autodetect IDA Pro version and transparently adjust the relevant function calls.
+- [✅] List available functions and their compatibility status.
+- [✅] Layout the functions in a modular fashion, using 'require()' hotloading to allow for easy development, debugging, and testing.
+- [✅] Set a function template.
+- [✅] Reach feature parity with FeatureProof beta.
+- [✅] Keep a compatibility table for each function.
 - [ ] Port function implementations to IDA 9 / IDALIB.
+- [ ] Set a roadmap of desired functions.
+- [ ] Consider GUI functions and ready plugin templating.
+- [ ] Harvest atomic functions from existing scripts.
 
 ## Function Template
 Create a new file in the Functions directory under the name 'function_name.py'. The file should contain the following template:
@@ -46,49 +48,67 @@ If functionality is added back to this repo, please add to the compatibility tab
 ### Core Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| format_address | No | Yes | No |
-| format_ea_t | No | Yes | No |
-| format_internal_address_from_string | No | Yes | No |
-| sanitize_ida_symbol_name | No | Yes | No |
-| rename_symbol_at_address | No | Yes | No |
-| check_type_is | No | Yes | No |
-| is_64_bit | No | Yes | No |
+| format_address | ❌ | ✅ | ❌ |
+| format_ea_t | ❌ | ✅ | ❌ |
+| format_internal_address_from_string | ❌ | ✅ | ❌ |
+| sanitize_ida_symbol_name | ❌ | ✅ | ❌ |
+| rename_symbol_at_address | ❌ | ✅ | ❌ |
+| check_type_is | ❌ | ✅ | ❌ |
+| is_64_bit | ❌ | ✅ | ❌ |
 ### XREFs
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| get_xref_addresses_to_this_address | No | Yes | No |
+| get_xref_addresses_to_this_address | ❌ | ✅ | ❌ |
 ### Strings Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| get_all_strings| No | Yes | No |
-| get_strings_containing_substr | No | Yes | No |
-| get_strings_starting_with | No | Yes | No |
-| get_strings_ending_with | No | Yes | No |
-| get_strings_matching_regex | No | Yes | No |
+| get_all_strings| ❌ | ✅ | ❌ |
+| get_strings_containing_substr | ❌ | ✅ | ❌ |
+| get_strings_starting_with | ❌ | ✅ | ❌ |
+| get_strings_ending_with | ❌ | ✅ | ❌ |
+| get_strings_matching_regex | ❌ | ✅ | ❌ |
 ### Comment Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| set_comment_at_address | No | Yes | No |
+| set_comment_at_address | ❌ | ✅ | ❌ |
 ### Decompiler Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| dump_decompiled_function_as_text | No | Yes | No |
+| dump_decompiled_function_as_text | ❌ | ✅ | ❌ |
 ### Function Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
 |---------------|-------------|-------------|----------|
-| walk_functions | No | Yes | No |
-| walk_functions_return_addresses | No | Yes | No |
-| walk_functions_return_names | No | Yes | No |
-| get_function_name_from_address | No | Yes | No |
+| walk_functions | ❌ | ✅ | ❌ |
+| walk_functions_return_addresses | ❌ | ✅ | ❌ |
+| walk_functions_return_names | ❌ | ✅ | ❌ |
+| get_function_name_from_address | ❌ | ✅ | ❌ |
+| get_all_library_functions | ❌ | ✅ | ❌ |
+| get_all_lumina_functions | ❌ | ✅ | ❌ |
+| get_all_thunk_functions | ❌ | ✅ | ❌ |
+| rename_function | ❌ | ✅ | ❌ |
+| reset_function_name | ❌ | ✅ | ❌ |
+| get_function_boundaries | ❌ | ✅ | ❌ |
+### Folder Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| create_folder | ❌ | ✅ | ❌ |
+| delete_folder | ❌ | ✅ | ❌ |
+| move_to_folder | ❌ | ✅ | ❌ |
+| check_folder_exists | ❌ | ✅ | ❌ |
+### Structure Functions
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
+|---------------|-------------|-------------|----------|
+| does_struct_exist | ❌ | ✅ | ❌ |
+| set_symbol_type_to_custom_struct | ❌ | ✅ | ❌ |
 
 # Tools currently relying on the FeatureProof Library:
 - [Project 0xA11c (Oxalic)](https://github.com/juanandresgs/Proj-0xA11c)
 
-# Roadmap
-- [X] Implement hotloading logic
-- [X] Define a function template
-- [X] Publish development up to this point
-- [IN PROGRESS] Break up monolithic functionality into templated functions
+# Roadmap (✅/❌)
+- [✅] Implement hotloading logic
+- [✅] Define a function template
+- [✅] Publish development up to this point
+- [✅] Break up monolithic functionality into templated functions
 - [ NOT STARTED ] Refactor and test Project 0xA11c scripts to insure beta parity
 - [ ] Deduplicate funtionality
 - [ ] Is there a better organization/segmentation for functions by namespace or functionality type?
@@ -119,3 +139,6 @@ If functionality is added back to this repo, please add to the compatibility tab
 - Get function argument values at XREFs
 - Get symbol type
 - def get_all_xref_addresses_to_this_name(symbol_name):
+- def get_all_xrefs_from_within_function(ea):
+- def get_all_xrefs_to_function(ea):
+- def create_struct_type(struct_name, size, fields):

@@ -8,7 +8,7 @@
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 
-from function_types import *
+from FunctionInfo import *
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
