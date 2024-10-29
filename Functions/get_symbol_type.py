@@ -1,11 +1,10 @@
 """
-    FeatureProof Middleware function: <function_name>.py
+    FeatureProof Middleware function: get_symbol_type.py
 
-    <Brief description of the function>
+    Get the type of a symbol at a given address.
 
-    :param <param1>: <Description of param1>
-    :param <param2>: <Description of param2>
-    :return: <Description of the return value>
+    :param symbol_address: Address of the symbol or name of symbol
+    :return: str type of the symbol
 """
 import os
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
@@ -15,9 +14,12 @@ def function_6(): # Add parameters as needed
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
     # Implementation for IDA Pro 6.8-7.x
 
-def function_8(): # Add parameters as needed
+def function_8(symbol_address): # Add parameters as needed
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    # Implementation for IDA Pro 7.x-8.4
+    # if argument is a string, convert it to an address
+    if isinstance(symbol_address, str):
+        symbol_address = fp.get_function_address_from_name(symbol_address)
+    return idc.get_type(symbol_address)
 
 def function_9(): # Add parameters as needed
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -28,8 +30,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': '<Brief description of the function>',
-            'parameters': ['<param1>', '<param2>'],
-            'return_type': '<Return type>'
+            'description': 'Get the type of a symbol at a given address.',
+            'parameters': 'symbol_address',
+            'return_type': 'str'
         },
     }

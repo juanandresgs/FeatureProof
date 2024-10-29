@@ -15,7 +15,7 @@ def function_6():
 
 def function_8(address, new_name):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    if idc.set_name(address, new_name, idc.SN_CHECK):
+    if idc.set_name(address, new_name, idaapi.SN_FORCE):
         logger.info(f"Symbol at 0x{address:X} renamed to {new_name}.")
     else:
         logger.warning(f"Failed to rename symbol at 0x{address:X}.")
