@@ -7,6 +7,8 @@
 """
     #TODO: Missing a logic to parse out types for IDA Pro vs Binary Ninja vs Ghidra, hence abstraction.
 """
+import idc
+import idaapi
 
 # Operand Types
 TYPE_VOID = idc.o_void      #  0  // No Operand                           ----------
