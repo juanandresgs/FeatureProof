@@ -1,5 +1,5 @@
 """
-    FeatureProof Middleware function: get_all_functions_by_type_return_addresses.py
+    FeatureProof Middleware function: get_all_function_addresses_by_type.py
 
     Get all functions of a specific type and return their addresses.
 
@@ -7,8 +7,9 @@
     :return: List of function addresses.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+from FeatureProof.FunctionInfo import *
+logger = fp.logger
 
-from FunctionInfo import *
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
@@ -17,7 +18,7 @@ def function_8(func_type):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
     functions = []
     for func_ea in fp.walk_functions():
-        if idaapi.get_func(func_ea).flags & func_type:
+        if idaapi.get_func(func_ea).flags & func_type: #TODO: Should this be abstracted independently?
             functions.append(fp.format_address(func_ea))
     return functions
 

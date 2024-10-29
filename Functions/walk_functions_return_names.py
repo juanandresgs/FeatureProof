@@ -6,6 +6,7 @@
     :return: List of function names.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")

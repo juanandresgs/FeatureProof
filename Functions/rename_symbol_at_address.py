@@ -8,6 +8,7 @@
     :return: None
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
@@ -18,6 +19,7 @@ def function_8(address, new_name):
         logger.info(f"Symbol at 0x{address:X} renamed to {new_name}.")
     else:
         logger.warning(f"Failed to rename symbol at 0x{address:X}.")
+        (f"Failed to rename symbol at 0x{address:X}.")
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")

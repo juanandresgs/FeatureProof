@@ -46,8 +46,8 @@ If functionality is added back to this repo, please add to the compatibility tab
 - Updated 10.4.2024
 
 ### Core Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | format_address | ❌ | ✅ | ❌ |
 | format_ea_t | ❌ | ✅ | ❌ |
 | format_internal_address_from_string | ❌ | ✅ | ❌ |
@@ -56,28 +56,28 @@ If functionality is added back to this repo, please add to the compatibility tab
 | check_type_is | ❌ | ✅ | ❌ |
 | is_64_bit | ❌ | ✅ | ❌ |
 ### XREFs
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | get_xref_addresses_to_this_address | ❌ | ✅ | ❌ |
 ### Strings Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | get_all_strings| ❌ | ✅ | ❌ |
 | get_strings_containing_substr | ❌ | ✅ | ❌ |
 | get_strings_starting_with | ❌ | ✅ | ❌ |
 | get_strings_ending_with | ❌ | ✅ | ❌ |
 | get_strings_matching_regex | ❌ | ✅ | ❌ |
 ### Comment Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | set_comment_at_address | ❌ | ✅ | ❌ |
 ### Decompiler Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | dump_decompiled_function_as_text | ❌ | ✅ | ❌ |
 ### Function Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | walk_functions | ❌ | ✅ | ❌ |
 | walk_functions_return_addresses | ❌ | ✅ | ❌ |
 | walk_functions_return_names | ❌ | ✅ | ❌ |
@@ -89,15 +89,15 @@ If functionality is added back to this repo, please add to the compatibility tab
 | reset_function_name | ❌ | ✅ | ❌ |
 | get_function_boundaries | ❌ | ✅ | ❌ |
 ### Folder Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | create_folder | ❌ | ✅ | ❌ |
 | delete_folder | ❌ | ✅ | ❌ |
 | move_to_folder | ❌ | ✅ | ❌ |
 | check_folder_exists | ❌ | ✅ | ❌ |
 ### Structure Functions
-| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ |
-|---------------|-------------|-------------|----------|
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
 | does_struct_exist | ❌ | ✅ | ❌ |
 | set_symbol_type_to_custom_struct | ❌ | ✅ | ❌ |
 

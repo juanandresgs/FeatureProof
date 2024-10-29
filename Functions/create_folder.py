@@ -6,8 +6,9 @@
     :param name: Name of the folder to create.
     :return: Boolean indicating success.
 """
-from FolderInfo import get_func_dir
+from FeatureProof.FolderInfo import get_func_dir
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6(name):
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")

@@ -1,18 +1,20 @@
 """
-    FeatureProof Middleware function: is_64bit.py
+    FeatureProof Middleware function: get_qword_at_address.py
 
-    Determine if the analyzed sample is 64-bit.
+    Get QWORD at address.
 
-    :return: True if the sample is 64-bit, False if it is 32-bit.
+    :param address: Address to get QWORD from.
+    :return: QWORD at address as an integer.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
-def function_8():
+def function_8(address):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return idaapi.inf_is_64bit()
+    return idc.get_qword(address)
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -22,8 +24,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'Determine if the analyzed sample is 64-bit.',
-            'parameters': [],
-            'return_type': 'bool'
+            'description': 'Get QWORD at address',
+            'parameters': 'address',
+            'return_type': 'int'
         },
     }

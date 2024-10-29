@@ -7,13 +7,14 @@
     :return: Address of the function.
 """
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6(name):
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
 def function_8(name):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return format_address(idc.get_name_ea_simple(name))
+    return fp.format_address(idc.get_name_ea_simple(name))
 
 def function_9(name):
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")

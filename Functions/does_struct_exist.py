@@ -6,7 +6,9 @@
     :param struct_name: Name of the struct to check.
     :return: True if the struct exists, False otherwise.
 """
+from FeatureProof.TypeInfo import BADADDR
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6(struct_name):
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
@@ -14,7 +16,7 @@ def function_6(struct_name):
 def function_8(struct_name):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
     sid = ida_struct.get_struc_id(struct_name)
-    return sid != idaapi.BADADDR
+    return sid != BADADDR
 
 def function_9(struct_name):
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")

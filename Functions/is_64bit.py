@@ -1,11 +1,10 @@
 """
-    FeatureProof Middleware function: get_all_lumina_functions.py
+    FeatureProof Middleware function: is_64bit.py
 
-    Get all Lumina functions in the binary.
+    Determine if the analyzed sample is 64-bit.
 
-    :return: List of function addresses.
+    :return: True if the sample is 64-bit, False if it is 32-bit.
 """
-from FeatureProof.FunctionInfo import TYPE_FUNC_LUMINA
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 logger = fp.logger
 
@@ -14,7 +13,7 @@ def function_6():
 
 def function_8():
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return fp.get_all_function_addresses_by_type(TYPE_FUNC_LUMINA)
+    return idaapi.inf_is_64bit()
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -24,8 +23,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'Get all Lumina functions in the binary.',
+            'description': 'Determine if the analyzed sample is 64-bit.',
             'parameters': [],
-            'return_type': 'List[int]'
+            'return_type': 'bool'
         },
     }

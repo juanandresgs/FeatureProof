@@ -7,14 +7,16 @@
     :param folder_name: Name of the target folder.
     :return: Boolean indicating success.
 """
-from FolderInfo import get_func_dir
+from FeatureProof.FolderInfo import get_func_dir
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
+logger = fp.logger
 
 def function_6(func_name, folder_name):
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
 def function_8(func_name, folder_name):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
+    #TODO: check if folder exists.
     func_dir = get_func_dir()
     return func_dir.rename(func_name, folder_name + "/" + func_name)
 

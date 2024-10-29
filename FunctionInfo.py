@@ -26,8 +26,8 @@ TYPE_FUNC_OUTLINE = 0x00020000
 # FunctionInfo class
 class FunctionInfo:
     def print_info(self):
-        print(f"Start EA: {format_address(self.start_ea)}")
-        print(f"End EA: {format_address(self.end_ea)}")
+        print(f"Start EA: {fp.format_address(self.start_ea)}")
+        print(f"End EA: {fp.format_address(self.end_ea)}")
         print(f"Size: {'0x{:X}'.format(self.size)}")
         print(f"Flags: {'0x{:X}'.format(self.flags)}")
         print(f"Returns?: {self.does_return}")

@@ -6,15 +6,15 @@ def get_strings_intersection_of_start_and_end(start_substr, end_substr, min_leng
     :param min_length: Minimum length of strings to be retrieved.
     :return: Set of tuples containing (address, string).
     """
-    starting_strings = set(get_strings_starting_with(start_substr, min_length))
-    ending_strings = set(get_strings_ending_with(end_substr, min_length))
+    starting_strings = set(fp.get_strings_starting_with(start_substr, min_length))
+    ending_strings = set(fp.get_strings_ending_with(end_substr, min_length))
     return starting_strings.intersection(ending_strings)
 
 ##################################
 ############SEGMENTS##############
 ##################################
 def walk_segment(segment_start):
-    return [format_address(ea) for ea in idautils.Heads(segment_start, idc.get_segm_end(segment_start))]
+    return [fp.format_address(ea) for ea in idautils.Heads(segment_start, idc.get_segm_end(segment_start))]
 
 def edit_segment_name_and_boundaries(segment_start, new_name, new_start, new_end):
     seg = ida_segment.getseg(segment_start)
@@ -51,7 +51,7 @@ def get_segment_name_at_address(ea):
 ########
 #   Untested
 def change_function_prototype(ea, prototype):
-    return change_symbol_type(ea, prototype)
+    return fp.change_symbol_type(ea, prototype)
 
 #   Untested
 def read_function_prototype(ea):
@@ -81,4 +81,4 @@ def get_function_info_object(ea) -> FunctionInfo:
     return FunctionInfo(start_ea, end_ea, size, flags, does_return)
 
 def print_function_info_summary(ea):
-    get_function_info_object(ea).print_info()
+    fp.get_function_info_object(ea).print_info()

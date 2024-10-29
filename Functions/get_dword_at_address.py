@@ -1,20 +1,20 @@
 """
-    FeatureProof Middleware function: get_all_lumina_functions.py
+    FeatureProof Middleware function: get_dword_at_address.py
 
-    Get all Lumina functions in the binary.
+    Get DWORD at address.
 
-    :return: List of function addresses.
+    :param address: Address to get DWORD from.
+    :return: DWORD at address as an integer.
 """
-from FeatureProof.FunctionInfo import TYPE_FUNC_LUMINA
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 logger = fp.logger
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
-def function_8():
+def function_8(address):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return fp.get_all_function_addresses_by_type(TYPE_FUNC_LUMINA)
+    return idc.get_dword(address)
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -24,8 +24,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'Get all Lumina functions in the binary.',
-            'parameters': [],
-            'return_type': 'List[int]'
+            'description': 'Get DWORD at address',
+            'parameters': 'address',
+            'return_type': 'int'
         },
     }

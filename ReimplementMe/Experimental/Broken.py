@@ -10,9 +10,9 @@ def get_all_xrefs_from_within_function(ea):
 #   DOESNT WORK, unrelated addresses outputted
 def get_all_xrefs_to_function(ea):
     func = ida_funcs.get_func(ea)
-    xrefs = [format_address(ref.frm) for ref in idautils.XrefsTo(func.start_ea)]
+    xrefs = [fp.format_address(ref.frm) for ref in idautils.XrefsTo(func.start_ea)]
     for head in idautils.Heads(func.start_ea, func.end_ea):
-        xrefs.extend([format_address(ref.frm) for ref in idautils.XrefsTo(head)])
+        xrefs.extend([fp.format_address(ref.frm) for ref in idautils.XrefsTo(head)])
     return xrefs
 
 # "guess_type_size" doesn't work'

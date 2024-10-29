@@ -1,20 +1,20 @@
 """
-    FeatureProof Middleware function: get_all_lumina_functions.py
+    FeatureProof Middleware function: get_instruction.py
 
-    Get all Lumina functions in the binary.
+    Get instruction mnemonic at address
 
-    :return: List of function addresses.
+    :param instruction_address: Address of the instruction.
+    :return: Instruction mnemonic as a string.
 """
-from FeatureProof.FunctionInfo import TYPE_FUNC_LUMINA
 filename = os.path.splitext(os.path.basename(__file__))[0][:-3]
 logger = fp.logger
 
 def function_6():
     logger.debug(f"{filename} for IDA Pro 6.8-7.x called successfully!")
 
-def function_8():
+def function_8(instruction_address):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    return fp.get_all_function_addresses_by_type(TYPE_FUNC_LUMINA)
+    return idc.print_insn_mnem(instruction_address)
 
 def function_9():
     logger.debug(f"{filename} for IDA Pro 9+ called successfully!")
@@ -24,8 +24,8 @@ def get_function():
     return {
         8: {
             'implementation': function_8,
-            'description': 'Get all Lumina functions in the binary.',
-            'parameters': [],
-            'return_type': 'List[int]'
+            'description': 'Get instruction mnemonic at address.',
+            'parameters': 'instruction_address',
+            'return_type': 'string'
         },
     }

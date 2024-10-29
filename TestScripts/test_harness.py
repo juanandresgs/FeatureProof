@@ -27,7 +27,7 @@ try:
     #     print(fp.format_address(f))
     # print(fp.walk_functions_return_addresses())
     # print(fp.walk_functions_return_names())
-    # print(fp.get_all_functions_by_type_return_addresses(TYPE_FUNC_LIB))
+    # print(fp.get_all_function_addresses_by_type(TYPE_FUNC_LIB))
     # print(fp.get_all_library_functions())
     # print(fp.get_all_lumina_functions())
     # print(fp.get_all_thunk_functions())
