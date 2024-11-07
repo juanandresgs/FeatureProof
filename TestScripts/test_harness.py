@@ -1,12 +1,10 @@
 import idaapi
-import logging
-idaapi.require("FeatureProof")
-from FeatureProof import Middleware
+idaapi.require("FeatureProof.FeatureProof")
+from FeatureProof.FeatureProof import Middleware
 
 fp = Middleware()
-fp.set_logging_level(logging.INFO)
-
-from function_types import *
+fp.set_logging_level(level=logging.INFO)
+logger = fp.logger
 
 try:
     # print(fp.get_all_strings())
@@ -41,5 +39,6 @@ try:
     # print(fp.check_folder_exists("TestFolder"))
     # print(fp.does_struct_exist("Rust_Slice"))
     # print(fp.set_symbol_type_to_custom_struct(0x45EDCC,"Rust_DebugInfo"))
+    print(fp.get_all_imports())
 except AttributeError as e:
     print(f"Error: {e}")
