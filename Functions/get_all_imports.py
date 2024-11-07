@@ -21,9 +21,10 @@ def function_8(): # Add parameters as needed
         if module_name:
             logger.debug(f"Module: {module_name}")
             def callback(ea, name, ordinal):
+                ea = fp.format_address(ea)
                 import_entry = (name or f'ordinal #{ordinal}', ea)
                 imports.append(import_entry)
-                logger.debug(f"  {ea:08X}: {import_entry[0]}")
+                logger.debug(f"  {ea}: {import_entry[0]}")
                 return True
             idaapi.enum_import_names(i, callback)
     return imports
