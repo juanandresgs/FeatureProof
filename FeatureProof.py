@@ -17,15 +17,17 @@ class Middleware:
         return cls._instance
 
     def __init__(self, folder_path='Functions'):
-        if not Middleware._initialized:
-            self.folder_path = os.path.join(os.path.dirname(__file__), folder_path)
-            self.functions = {}
-            self.module_globals = {}
-            self.setup_logger()
-            self.get_ida_version()
-            self.inject_imports()
-            self.load_modules()
-            Middleware._initialized = True
+        if Middleware._initialized:
+            return
+
+        self.folder_path = os.path.join(os.path.dirname(__file__), folder_path)
+        self.functions = {}
+        self.module_globals = {}
+        self.setup_logger()
+        self.get_ida_version()
+        self.inject_imports()
+        self.load_modules()
+        Middleware._initialized = True
 
     @classmethod
     def get_instance(cls):
