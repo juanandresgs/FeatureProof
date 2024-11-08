@@ -3,8 +3,10 @@ idaapi.require("FeatureProof.FeatureProof")
 from FeatureProof.FeatureProof import Middleware
 
 fp = Middleware()
-fp.set_logging_level(level=logging.INFO)
+fp.set_logging_level(level=logging.DEBUG)
 logger = fp.logger
+
+from FeatureProof.FunctionInfo import *
 
 try:
     # print(fp.get_all_strings())
@@ -21,11 +23,11 @@ try:
     # print(fp.is_64_bit())
     # print(fp.get_all_xref_addresses_to_this_address(0x0045B116))
     # print(fp.dump_decompiled_function_as_text(0x456EB8))
-    # for f in fp.walk_functions():
+    #for f in fp.walk_functions():
     #     print(fp.format_address(f))
     # print(fp.walk_functions_return_addresses())
     # print(fp.walk_functions_return_names())
-    # print(fp.get_all_function_addresses_by_type(TYPE_FUNC_LIB))
+    #print(fp.get_all_function_addresses_by_type(TYPE_FUNC_THUNK))
     # print(fp.get_all_library_functions())
     # print(fp.get_all_lumina_functions())
     # print(fp.get_all_thunk_functions())
@@ -39,6 +41,6 @@ try:
     # print(fp.check_folder_exists("TestFolder"))
     # print(fp.does_struct_exist("Rust_Slice"))
     # print(fp.set_symbol_type_to_custom_struct(0x45EDCC,"Rust_DebugInfo"))
-    print(fp.get_all_imports())
+    # print(fp.get_all_imports())
 except AttributeError as e:
     print(f"Error: {e}")

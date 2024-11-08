@@ -109,10 +109,11 @@ If functionality is added back to this repo, please add to the compatibility tab
 - [✅] Define a function template
 - [✅] Publish development up to this point
 - [✅] Break up monolithic functionality into templated functions
-- [ NOT STARTED ] Refactor and test Project 0xA11c scripts to insure beta parity
-- [ ] Deduplicate funtionality
+- [ IN PROGRESS ] Refactor and test Project 0xA11c scripts to insure beta parity
 - [ ] Is there a better organization/segmentation for functions by namespace or functionality type?
 - [ ] Find a way to better integrate enums (function_types) and sub classes (func_info)
+- [ ] Assess the viability of reimplementing the main harness for Binary Ninja
+- [ ] Assess the viability of reimplementing the main harness for Ghidra
 
 ## Desired Functions:
 - Get XREFs to symbol
