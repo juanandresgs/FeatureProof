@@ -43,7 +43,7 @@ If functionality is added back to this repo, please add to the compatibility tab
 ```
 
 # Function Compatibility Table
-- Updated 10.4.2024
+- Updated 10.4.2024 ( # TODO: NEEDS UPDATING )
 
 ### Core Functions
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |

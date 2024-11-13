@@ -16,7 +16,9 @@ def function_6(func_name, folder_name):
 
 def function_8(func_name, folder_name):
     logger.debug(f"{filename} for IDA Pro 7.x-8.4 called successfully!")
-    #TODO: check if folder exists.
+    if not fp.check_folder_exists(folder_name):
+        logger.error(f"Folder named: {folder_name} does not exist!")
+        fp.create_folder(folder_name)
     func_dir = get_func_dir()
     return func_dir.rename(func_name, folder_name + "/" + func_name)
 
