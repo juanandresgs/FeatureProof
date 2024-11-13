@@ -43,63 +43,99 @@ If functionality is added back to this repo, please add to the compatibility tab
 ```
 
 # Function Compatibility Table
-- Updated 10.4.2024 ( # TODO: NEEDS UPDATING )
+- Updated 11.13.2024
 
-### Core Functions
+### Core
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| format_address | ❌ | ✅ | ❌ |
-| format_ea_t | ❌ | ✅ | ❌ |
-| format_internal_address_from_string | ❌ | ✅ | ❌ |
-| sanitize_ida_symbol_name | ❌ | ✅ | ❌ |
-| rename_symbol_at_address | ❌ | ✅ | ❌ |
-| check_type_is | ❌ | ✅ | ❌ |
-| is_64_bit | ❌ | ✅ | ❌ |
-### XREFs
+| format_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| format_ea_t | ❌ | ✅ | ❌ | ❌ | ❌ |
+| format_internal_address_from_string | ❌ | ✅ | ❌ | ❌ | ❌ |
+| sanitize_ida_symbol_name | ❌ | ✅ | ❌ | ❌ | ❌ |
+| is_64_bit | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_imagebase | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Memory and Data
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| get_xref_addresses_to_this_address | ❌ | ✅ | ❌ |
-### Strings Functions
+| get_bytes_at_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_byte | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_qword_at_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_dword_at_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_wide_dword | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_wide_word | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Instructions and Operations
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| get_all_strings| ❌ | ✅ | ❌ |
-| get_strings_containing_substr | ❌ | ✅ | ❌ |
-| get_strings_starting_with | ❌ | ✅ | ❌ |
-| get_strings_ending_with | ❌ | ✅ | ❌ |
-| get_strings_matching_regex | ❌ | ✅ | ❌ |
-### Comment Functions
+| get_all_instructions | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_instruction | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_next_instruction_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_previous_instruction_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_operand_type | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_operand_value | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Functions and Names
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| set_comment_at_address | ❌ | ✅ | ❌ |
-### Decompiler Functions
+| walk_functions | ❌ | ✅ | ❌ | ❌ | ❌ |
+| walk_functions_return_addresses | ❌ | ✅ | ❌ | ❌ | ❌ |
+| walk_functions_return_names | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_function_name_from_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_function_address_from_name | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_all_library_functions | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_all_lumina_functions | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_all_thunk_functions | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_all_function_addresses_by_type | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_function_boundaries | ❌ | ✅ | ❌ | ❌ | ❌ |
+| rename_function | ❌ | ✅ | ❌ | ❌ | ❌ |
+| reset_function_name | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### References and Cross-References
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| dump_decompiled_function_as_text | ❌ | ✅ | ❌ |
-### Function Functions
+| get_all_xref_addresses_to_this_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_all_imports | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Strings
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| walk_functions | ❌ | ✅ | ❌ |
-| walk_functions_return_addresses | ❌ | ✅ | ❌ |
-| walk_functions_return_names | ❌ | ✅ | ❌ |
-| get_function_name_from_address | ❌ | ✅ | ❌ |
-| get_all_library_functions | ❌ | ✅ | ❌ |
-| get_all_lumina_functions | ❌ | ✅ | ❌ |
-| get_all_thunk_functions | ❌ | ✅ | ❌ |
-| rename_function | ❌ | ✅ | ❌ |
-| reset_function_name | ❌ | ✅ | ❌ |
-| get_function_boundaries | ❌ | ✅ | ❌ |
-### Folder Functions
+| get_all_strings | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_strings_containing_substr | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_strings_starting_with | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_strings_ending_with | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_strings_matching_regex | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_regex_matches_from_strings | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Structures and Types
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| create_folder | ❌ | ✅ | ❌ |
-| delete_folder | ❌ | ✅ | ❌ |
-| move_to_folder | ❌ | ✅ | ❌ |
-| check_folder_exists | ❌ | ✅ | ❌ |
-### Structure Functions
+| does_struct_exist | ❌ | ✅ | ❌ | ❌ | ❌ |
+| create_new_struct | ❌ | ✅ | ❌ | ❌ | ❌ |
+| check_if_struct_exists | ❌ | ✅ | ❌ | ❌ | ❌ |
+| set_symbol_type_to_custom_struct | ❌ | ✅ | ❌ | ❌ | ❌ |
+| check_type_is | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_symbol_type | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Segments
 | Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
 |---------------|-------------|-------------|----------|-------| ------ |
-| does_struct_exist | ❌ | ✅ | ❌ |
-| set_symbol_type_to_custom_struct | ❌ | ✅ | ❌ |
+| get_segment_by_name | ❌ | ✅ | ❌ | ❌ | ❌ |
+| get_segment_name_at_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Organization
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
+| create_folder | ❌ | ✅ | ❌ | ❌ | ❌ |
+| delete_folder | ❌ | ✅ | ❌ | ❌ | ❌ |
+| move_to_folder | ❌ | ✅ | ❌ | ❌ | ❌ |
+| check_folder_exists | ❌ | ✅ | ❌ | ❌ | ❌ |
+
+### Comments and Decompilation
+| Function Name | IDA 6.8-7.2 | IDA 7.3-8.4 | IDA 9.0+ | Binja | Ghidra |
+|---------------|-------------|-------------|----------|-------| ------ |
+| set_comment_at_address | ❌ | ✅ | ❌ | ❌ | ❌ |
+| dump_decompiled_function_as_text | ❌ | ✅ | ❌ | ❌ | ❌ |
 
 # Tools currently relying on the FeatureProof Library:
 - [Project 0xA11c (Oxalic)](https://github.com/juanandresgs/Proj-0xA11c)
@@ -109,20 +145,16 @@ If functionality is added back to this repo, please add to the compatibility tab
 - [✅] Define a function template
 - [✅] Publish development up to this point
 - [✅] Break up monolithic functionality into templated functions
-- [ IN PROGRESS ] Refactor and test Project 0xA11c scripts to insure beta parity
-- [ ] Is there a better organization/segmentation for functions by namespace or functionality type?
-- [ ] Find a way to better integrate enums (function_types) and sub classes (func_info)
+- [✅] Find a way to better integrate enums (function_types) and sub classes (func_info)
+- [🚧] Refactor and test Project 0xA11c scripts to insure beta parity
 - [ ] Assess the viability of reimplementing the main harness for Binary Ninja
 - [ ] Assess the viability of reimplementing the main harness for Ghidra
+- [ ] Can we enable autocompletion from scripts that rely on FeatureProof?
 
 ## Desired Functions:
-- Get XREFs to symbol
-- Get XREFs to address
-- Get XREFs from address
-- Get descending call graph from starting function
 - Get ascending call graph from starting function
+- Get descending call graph from starting function
 - Get XREF count to symbol
-- def list_all_segments():
 - def list_all_segments_by_name():
 - def list_all_segments_by_starting_address():
 - def determine_start_of_segment_at_address(ea):
@@ -132,14 +164,6 @@ If functionality is added back to this repo, please add to the compatibility tab
 - Move all functions from one folder to another in IDA Pro.
 - def empty_folder(folder_name):
 - Get all symbols referred to within a function
-- Get all references to a given symbol name
-- Get function at address
-- Get segment name at address
-- Get value of first operand
-- Get value of second operand
 - Get function argument values at XREFs
-- Get symbol type
-- def get_all_xref_addresses_to_this_name(symbol_name):
 - def get_all_xrefs_from_within_function(ea):
-- def get_all_xrefs_to_function(ea):
 - def create_struct_type(struct_name, size, fields):
