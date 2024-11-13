@@ -11,6 +11,13 @@ class Middleware:
     _instance = None
     _initialized = False
 
+    # Add these as class constants
+    LOG_DEBUG = logging.DEBUG
+    LOG_INFO = logging.INFO
+    LOG_WARNING = logging.WARNING
+    LOG_ERROR = logging.ERROR
+    LOG_CRITICAL = logging.CRITICAL
+
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(Middleware, cls).__new__(cls)
@@ -37,21 +44,35 @@ class Middleware:
 
     def setup_logger(self):
         self.logger = logging.getLogger('FeatureProof')
+        self._configure_logger()
+
+    def _configure_logger(self):
+        """Configure the logger with a default setup."""
+        formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
         handler = logging.StreamHandler()
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
-        self.logger.setLevel(logging.WARNING)
-        self.module_globals['logger'] = self.logger
+        self.logger.setLevel(self.LOG_INFO)  # Default to INFO level
 
-    def set_debug_mode(self, debug_mode):
-        if debug_mode:
-            self.logger.setLevel(logging.DEBUG)
-        else:
-            self.logger.setLevel(logging.INFO)
-
-    def set_logging_level(self, level):
-            self.logger.setLevel(level)
+    def set_logging_level(self, level="INFO"):
+        """
+        Set the logging level for FeatureProof.
+        
+        :param level: String representing the log level ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
+        """
+        level_map = {
+            "DEBUG": self.LOG_DEBUG,
+            "INFO": self.LOG_INFO,
+            "WARNING": self.LOG_WARNING,
+            "ERROR": self.LOG_ERROR,
+            "CRITICAL": self.LOG_CRITICAL
+        }
+        
+        if isinstance(level, str):
+            level = level_map.get(level.upper(), self.LOG_INFO)
+        
+        self.logger.setLevel(level)
+        self.logger.debug(f"Log level set to {level}")
 
     def get_ida_version(self):
         self.version = idaapi.get_kernel_version()
